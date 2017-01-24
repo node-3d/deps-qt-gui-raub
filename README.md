@@ -1,2 +1,2 @@
 # node-deps-qt-gui
-Qt Gui binaries.
+Common binary dependencies for qt-dependent runtime
