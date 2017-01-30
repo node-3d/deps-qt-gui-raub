@@ -2,7 +2,7 @@
 	"name": "node-deps-qt-gui-raub",
 	"author": "Luis Blanco <raubtierxxx@gmail.com>",
 	"description": "A custom way of binary dependencies distribution.",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"main": "index.js",
 	"keywords": [
 		"qt",
