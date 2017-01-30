@@ -1,6 +1,6 @@
 'use strict';
 
-require('node-deps-qt-core');
+require('node-deps-qt-core-raub');
 
 const os = require('os');
 
