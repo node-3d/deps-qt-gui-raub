@@ -1,5 +1,7 @@
 'use strict';
 
+require('node-deps-qt-core');
+
 const os = require('os');
 
 const addonPaths = {
