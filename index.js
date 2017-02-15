@@ -4,12 +4,17 @@ require('node-deps-qt-core-raub');
 
 const os = require('os');
 
-const addonPaths = {
+const platformPaths = {
 	win32 : '/bin_win32' ,
 	linux : '/bin_linux' ,
 	darwin: '/bin_darwin',
 };
 
-process.env.path += ';' + __dirname + addonPaths[os.platform()];
+const binPath = __dirname + platformPaths[os.platform()];
 
-module.exports = __dirname;
+process.env.path += ';' + binPath;
+
+module.exports = {
+	root: __dirname,
+	bin : binPath,
+};
