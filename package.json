@@ -1,8 +1,8 @@
 {
-	"name": "node-deps-qt-gui-raub",
+	"name": "deps-qt-gui-raub",
 	"author": "Luis Blanco <raubtierxxx@gmail.com>",
-	"description": "Common binary dependencies for qt-gui-dependent modules.",
-	"version": "5.9.1",
+	"description": "Qt Core dynamic libraries for dependent Node.js addons",
+	"version": "0.0.1",
 	"main": "index.js",
 	"keywords": [
 		"qt",
@@ -26,6 +26,7 @@
 		"url": "https://github.com/raub/node-deps-qt-gui"
 	},
 	"dependencies": {
-		"node-deps-qt-core-raub": "5.9.1"
+		"deps-qt-core-raub": "0.0.1",
+		"addon-tools-raub": "0.0.7"
 	}
 }
