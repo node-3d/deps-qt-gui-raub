@@ -1,13 +1,13 @@
-# FreeImage binaries
+# Qt Gui binaries
 
 * Platforms: win x32/x64, linux x32/x64, mac x64.
-* Library: FreeImage.
-* Linking: static dll-type.
+* Library: Qt.
+* Linking: dynamic dll-type.
 
 
 ## Install
 
-`npm i -s deps-qt-core-raub`
+`npm i -s deps-qt-gui-raub`
 
 
 ## Legal notice
@@ -38,54 +38,33 @@ The rest of this package is MIT licensed.
 
 ## Usage
 
+
+### JS
+
+Before any import of Qt-dependent module, there should be `require('deps-qt-gui-raub')`.
+On Windows it adds Qt's DLL location to ENV PATH. On Unix it does nothing.
+
+
 ### binding.gyp
+
+On Unix, **special** runtime library directories are not in ENV PATH. The paths
+to such directories have to be compiled into the node-addon with `rpath` option.
 
 ```javascript
 	'variables': {
-		'qt_core_include' : '<!(node -e "require(\'deps-qt-core-raub\').include()")',
-		'qt_core_bin'     : '<!(node -e "require(\'deps-qt-core-raub\').bin()")',
+		'qt_core_bin' : '<!(node -e "require(\'deps-qt-core-raub\').core()")',
+		'qt_gui_bin'  : '<!(node -e "require(\'deps-qt-core-raub\').bin()")',
 	},
 	...
 	'targets': [
 		{
 			'target_name': '...',
 			
-			'include_dirs': [
-				'<(freeimage_include)',
-				...
-			],
-			
-			'library_dirs': [ '<(freeimage_bin)' ],
-			
 			'conditions': [
-				
-				['OS=="linux"', {
-					'libraries': [
-						'-Wl,-rpath,<(freeimage_bin)',
-						'<(freeimage_bin)/freeimage.so',
-						...
-					],
+				['OS=="linux" or OS=="mac"', {
+					'libraries': ['-Wl,-rpath,<(qt_core_bin),<(qt_gui_bin)'],
 				}],
-				
-				['OS=="mac"', {
-					'libraries': [
-						'-Wl,-rpath,<(freeimage_bin)',
-						'<(freeimage_bin)/freeimage.dylib',
-						...
-					],
-				}],
-				
-				['OS=="win"', {
-					'libraries': [ 'FreeImage.lib', ... ],
-				}],
-				
 			],
 		},
 ```
 
-
-### addon.cpp
-
-```cpp
-#include <FreeImage.h>
-```
