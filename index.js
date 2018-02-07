@@ -1,6 +1,17 @@
 'use strict';
 
+const path = require('path');
+
+const tools = require('addon-tools-raub');
+
 require('deps-qt-core-raub');
 
 
-module.exports = require('addon-tools-raub').paths(__dirname);
+const coreInclude = path.dirname(require.resolve('deps-qt-core-raub')).replace(/\\/g, '/');
+
+module.exports = {
+	...tools.paths(__dirname),
+	...{ core: tools.paths(coreInclude).bin }
+};
+
+console.log('index.js', module.exports);
