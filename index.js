@@ -13,5 +13,3 @@ module.exports = {
 	...tools.paths(__dirname),
 	...{ core: tools.paths(coreInclude).bin }
 };
-
-console.log('index.js', module.exports);
