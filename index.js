@@ -8,6 +8,6 @@ const core = require('deps-qt-core-raub');
 
 
 module.exports = {
+	core,
 	...tools.paths(__dirname),
-	...{ core: core.bin }
 };
