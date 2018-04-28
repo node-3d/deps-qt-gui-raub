@@ -31,6 +31,6 @@
 	},
 	"dependencies": {
 		"deps-qt-core-raub": "0.0.3",
-		"addon-tools-raub": "0.0.8"
+		"addon-tools-raub": "0.1.8"
 	}
 }
