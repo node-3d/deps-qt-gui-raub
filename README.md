@@ -11,7 +11,7 @@ This is a part of [Node3D](https://github.com/node-3d) project.
 
 ## Synopsis
 
-This dependency package is distributing **Qt Gui**
+This dependency package is distributing **Qt Gui 5.11.1**
 binaries through **NPM** for **Node.js** addons.
 
 * Platforms: win x32/x64, linux x64, mac x64.
