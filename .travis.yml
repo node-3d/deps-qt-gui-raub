@@ -42,7 +42,7 @@ install:
 
 script:
   - cd bin-linux64/plugins/platform
-  - ldd libqxcb.so
+  - LD_LIBRARY_PATH=. ldd libqxcb.so
   - cd ../../..
   - cd test && npm test
   - cd ..
