@@ -46,11 +46,6 @@ Adjust `binding.gyp`:
 			'target_name': '...',
 			
 			'conditions': [
-				['OS=="linux" or OS=="mac"', {
-					'libraries': ['-Wl,-rpath,<(qt_core_bin):<(qt_gui_bin)'],
-				}],
-			],
-			'conditions': [
 				[
 					'OS=="linux" or OS=="mac"', {
 						'libraries': [
