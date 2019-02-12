@@ -31,7 +31,7 @@
 				'inputs'      : [],
 				'outputs'     : ['<(qt_gui_bin)/qml'],
 				'action'      : [
-					'chmod +x', '<(qt_gui_bin)/fix-rpath.sh',
+					'chmod', '+x', '<(qt_gui_bin)/fix-rpath.sh',
 				],
 			}],
 		},
