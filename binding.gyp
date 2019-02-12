@@ -21,13 +21,13 @@
 		},
 		
 	],
-	'conditions': [['OS=="mac"', {
-		'targets': [{
-			'target_name'  : 'fix_osx',
+	'conditions': [['OS=="mac"', { 'targets': [
+		{
+			'target_name'  : 'fix_osx1',
 			'type'         : 'none',
 			'dependencies' : ['remove_extras'],
 			'actions'      : [{
-				'action_name' : 'Osx lib fixed.',
+				'action_name' : 'Rpath CORE added.',
 				'inputs'      : [],
 				'outputs'     : ['<(qt_gui_bin)'],
 				'action'      : [
@@ -35,13 +35,26 @@
 					'-add_rpath',
 					'<(qt_core_bin)',
 					'<(qt_gui_bin)/plugins/platforms/libqcocoa.dylib',
-					'&&',
+				],
+			}
+			],
+		},
+		{
+			'target_name'  : 'fix_osx2',
+			'type'         : 'none',
+			'dependencies' : ['fix_osx1'],
+			'actions'      : [{
+				'action_name' : 'Rpath GUI added.',
+				'inputs'      : [],
+				'outputs'     : ['<(qt_gui_bin)'],
+				'action'      : [
 					'install_name_tool',
 					'-add_rpath',
 					'<(qt_gui_bin)',
 					'<(qt_gui_bin)/plugins/platforms/libqcocoa.dylib',
 				],
-			}],
-		}],
-	}]],
+			}
+			],
+		},
+	]}]],
 }
