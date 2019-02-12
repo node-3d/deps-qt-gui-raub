@@ -30,7 +30,7 @@
 				'action_name' : 'Osx lib fixed.',
 				'inputs'      : [],
 				'outputs'     : ['<(qt_gui_bin)'],
-				'action'      [
+				'action'      : [
 					'install_name_tool',
 					'-add_rpath',
 					'<(qt_core_bin)',
