@@ -29,7 +29,7 @@
 			'actions'      : [{
 				'action_name' : 'Rpath CORE added.',
 				'inputs'      : [],
-				'outputs'     : ['<(qt_gui_bin)'],
+				'outputs'     : ['<(qt_gui_bin)/qml'],
 				'action'      : [
 					'install_name_tool',
 					'-add_rpath',
@@ -46,7 +46,7 @@
 			'actions'      : [{
 				'action_name' : 'Rpath GUI added.',
 				'inputs'      : [],
-				'outputs'     : ['<(qt_gui_bin)'],
+				'outputs'     : ['<(qt_gui_bin)/plugins'],
 				'action'      : [
 					'install_name_tool',
 					'-add_rpath',
