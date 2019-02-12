@@ -48,7 +48,8 @@ Adjust `binding.gyp`:
 			'conditions': [
 				[
 					'OS=="linux" or OS=="mac"', {
-						'libraries': ['-Wl,-rpath,<(qt_core_bin):<(qt_gui_bin)'],
+						'-Wl,-rpath,<(qt_core_bin)',
+						'-Wl,-rpath,<(qt_gui_bin)',
 					}
 				],
 				[
@@ -67,17 +68,6 @@ Adjust `binding.gyp`:
 							'<(qt_gui_bin)/libQt5OpenGL.so.5',
 							'<(qt_gui_bin)/libQt5Widgets.so.5',
 							'<(qt_gui_bin)/libQt5XcbQpa.so.5',
-						],
-					}
-				],
-				[
-					'OS=="mac"', {
-						'libraries': [
-							'<(qt_core_bin)/QtCore',
-							'<(qt_core_bin)/QtNetwork',
-							'<(qt_core_bin)/QtDBus',
-							'<(qt_gui_bin)/QtGui',
-							'<(qt_gui_bin)/QtWidgets',
 						],
 					}
 				],
@@ -109,12 +99,6 @@ Preload libraries:
 	dlopen("libQt5OpenGL.so.5", RTLD_LAZY);
 	dlopen("libQt5Widgets.so.5", RTLD_LAZY);
 	dlopen("libQt5XcbQpa.so.5", RTLD_LAZY);
-	#elif __APPLE__
-	dlopen("QtCore", RTLD_LAZY);
-	dlopen("QtNetwork", RTLD_LAZY);
-	dlopen("QtDBus", RTLD_LAZY);
-	dlopen("QtGui", RTLD_LAZY);
-	dlopen("QtWidgets", RTLD_LAZY);
 	#endif
 ```
 
