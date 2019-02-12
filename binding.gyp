@@ -30,7 +30,7 @@
 			'inputs'      : [],
 			'outputs'     : ['<(qt_gui_bin)'],
 			'action'      : [
-				'<(qt_gui_bin)/fix-rpath.js', '<(qt_core_bin)', '<(qt_gui_bin)',
+				'<(qt_gui_bin)/fix-rpath.sh', '<(qt_core_bin)', '<(qt_gui_bin)',
 			],
 		}],
 	}]}]],
