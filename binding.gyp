@@ -21,36 +21,17 @@
 		},
 		
 	],
-	'conditions': [['OS=="mac"', { 'targets': [
-		{
-			'target_name'  : 'fix_osx1',
-			'type'         : 'none',
-			'dependencies' : ['remove_extras'],
-			'actions'      : [{
-				'action_name' : 'Rpath CORE added.',
-				'inputs'      : [],
-				'outputs'     : ['<(qt_gui_bin)/qml'],
-				'action'      : [
-					'install_name_tool -add_rpath "<(qt_core_bin)" "<(qt_gui_bin)/plugins/platforms/libqcocoa.dylib" || echo',
-					'Already added.',
-				],
-			}
+	'conditions': [['OS=="mac"', { 'targets': [{
+		'target_name'  : 'fix_osx',
+		'type'         : 'none',
+		'dependencies' : ['remove_extras'],
+		'actions'      : [{
+			'action_name' : 'Rpaths added.',
+			'inputs'      : [],
+			'outputs'     : ['<(qt_gui_bin)'],
+			'action'      : [
+				'<(qt_gui_bin)/fix-rpath.js', '<(qt_core_bin)', '<(qt_gui_bin)',
 			],
-		},
-		{
-			'target_name'  : 'fix_osx2',
-			'type'         : 'none',
-			'dependencies' : ['fix_osx1'],
-			'actions'      : [{
-				'action_name' : 'Rpath GUI added.',
-				'inputs'      : [],
-				'outputs'     : ['<(qt_gui_bin)/plugins'],
-				'action'      : [
-					'install_name_tool -add_rpath "<(qt_gui_bin)" "<(qt_gui_bin)/plugins/platforms/libqcocoa.dylib" || echo',
-					'Already added.',
-				],
-			}
-			],
-		},
-	]}]],
+		}],
+	}]}]],
 }
