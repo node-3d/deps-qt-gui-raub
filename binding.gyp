@@ -31,9 +31,10 @@
 				'inputs'      : [],
 				'outputs'     : ['<(qt_gui_bin)/qml'],
 				'action'      : [
-					'install_name_tool',
-					'-add_rpath',
-					'<(qt_core_bin)',
+					'otool', '-l',
+					# 'install_name_tool',
+					# '-add_rpath',
+					# '<(qt_core_bin)',
 					'<(qt_gui_bin)/plugins/platforms/libqcocoa.dylib',
 				],
 			}
