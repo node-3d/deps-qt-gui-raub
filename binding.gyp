@@ -21,17 +21,32 @@
 		},
 		
 	],
-	'conditions': [['OS=="mac"', { 'targets': [{
-		'target_name'  : 'fix_osx',
-		'type'         : 'none',
-		'dependencies' : ['remove_extras'],
-		'actions'      : [{
-			'action_name' : 'Rpaths added.',
-			'inputs'      : [],
-			'outputs'     : ['<(qt_gui_bin)'],
-			'action'      : [
-				'<(qt_gui_bin)/fix-rpath.sh', '<(qt_core_bin)', '<(qt_gui_bin)',
-			],
-		}],
-	}]}]],
+	'conditions': [['OS=="mac"', { 'targets': [
+		{
+			'target_name'  : 'fix_osx1',
+			'type'         : 'none',
+			'dependencies' : ['remove_extras'],
+			'actions'      : [{
+				'action_name' : 'Execution permitted.',
+				'inputs'      : [],
+				'outputs'     : ['<(qt_gui_bin)/qml'],
+				'action'      : [
+					'chmod', '+x', '<(qt_gui_bin)/fix-rpath.sh',
+				],
+			}],
+		},
+		{
+			'target_name'  : 'fix_osx2',
+			'type'         : 'none',
+			'dependencies' : ['fix_osx1'],
+			'actions'      : [{
+				'action_name' : 'Rpaths added.',
+				'inputs'      : [],
+				'outputs'     : ['<(qt_gui_bin)/plugins'],
+				'action'      : [
+					'<(qt_gui_bin)/fix-rpath.sh', '<(qt_core_bin)', '<(qt_gui_bin)',
+				],
+			}],
+		},
+	]}]],
 }
