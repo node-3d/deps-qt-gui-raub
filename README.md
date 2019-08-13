@@ -12,10 +12,10 @@ This is a part of [Node3D](https://github.com/node-3d) project.
 
 ## Synopsis
 
-This dependency package is distributing **Qt Gui 5.11.1**
+This dependency package is distributing **Qt Core 5.13.0**
 binaries through **NPM** for **Node.js** addons.
 
-* Platforms: win x32/x64, linux x64, mac x64.
+* Platforms (x64): Windows, Linux, OSX.
 * Library: Qt.
 * Linking: dynamic dll-type.
 
@@ -37,8 +37,9 @@ Adjust `binding.gyp`:
 
 ```javascript
 	'variables': {
-		'qt_core_bin' : '<!(node -e "require(\'deps-qt-gui-raub\').core.bin()")',
-		'qt_gui_bin'  : '<!(node -e "require(\'deps-qt-gui-raub\').bin()")',
+		'bin'         : '<!(node -p "require(\'addon-tools-raub\').bin")',
+		'qt_core_bin' : '<!(node -p "require(\'deps-qt-core-raub\').bin")',
+		'qt_gui_bin'  : '<!(node -p "require(\'deps-qt-gui-raub\').bin")',
 	},
 	...
 	'targets': [
@@ -46,31 +47,40 @@ Adjust `binding.gyp`:
 			'target_name': '...',
 			
 			'conditions': [
-				[
-					'OS=="linux" or OS=="mac"', {
-						'-Wl,-rpath,<(qt_core_bin)',
-						'-Wl,-rpath,<(qt_gui_bin)',
-					}
-				],
-				[
-					'OS=="linux"', {
-						'libraries': [
-							'<(qt_core_bin)/libicui18n.so.56',
-							'<(qt_core_bin)/libicuuc.so.56',
-							'<(qt_core_bin)/libicudata.so.56',
-							'<(qt_core_bin)/libicuio.so.56',
-							'<(qt_core_bin)/libicule.so.56',
-							'<(qt_core_bin)/libicutu.so.56',
-							'<(qt_core_bin)/libQt5Core.so.5',
-							'<(qt_core_bin)/libQt5Network.so.5',
-							'<(qt_core_bin)/libQt5DBus.so.5',
-							'<(qt_gui_bin)/libQt5Gui.so.5',
-							'<(qt_gui_bin)/libQt5OpenGL.so.5',
-							'<(qt_gui_bin)/libQt5Widgets.so.5',
-							'<(qt_gui_bin)/libQt5XcbQpa.so.5',
-						],
-					}
-				],
+				
+				['OS=="linux"', {
+					'libraries': [
+						"-Wl,-rpath,'$$ORIGIN'",
+						"-Wl,-rpath,'$$ORIGIN/../node_modules/deps-qt-core-raub/<(bin)'",
+						"-Wl,-rpath,'$$ORIGIN/../node_modules/deps-qt-gui-raub/<(bin)'",
+						"-Wl,-rpath,'$$ORIGIN/../../deps-qt-core-raub/<(bin)'",
+						"-Wl,-rpath,'$$ORIGIN/../../deps-qt-gui-raub/<(bin)'",
+						'<(qt_core_bin)/libicui18n.so.56',
+						'<(qt_core_bin)/libicuuc.so.56',
+						'<(qt_core_bin)/libicudata.so.56',
+						'<(qt_core_bin)/libicuio.so.56',
+						'<(qt_core_bin)/libicule.so.56',
+						'<(qt_core_bin)/libicutu.so.56',
+						'<(qt_core_bin)/libQt5Core.so.5',
+						'<(qt_core_bin)/libQt5Network.so.5',
+						'<(qt_core_bin)/libQt5DBus.so.5',
+						'<(qt_gui_bin)/libQt5Gui.so.5',
+						'<(qt_gui_bin)/libQt5OpenGL.so.5',
+						'<(qt_gui_bin)/libQt5Widgets.so.5',
+						'<(qt_gui_bin)/libQt5XcbQpa.so.5',
+					],
+				}],
+				
+				['OS=="mac"', {
+					'libraries': [
+						'-Wl,-rpath,@loader_path',
+						'-Wl,-rpath,@loader_path/../node_modules/deps-qt-core-raub/<(bin)',
+						'-Wl,-rpath,@loader_path/../node_modules/deps-qt-gui-raub/<(bin)',
+						'-Wl,-rpath,@loader_path/../../deps-qt-core-raub/<(bin)',
+						'-Wl,-rpath,@loader_path/../../deps-qt-gui-raub/<(bin)',
+					],
+				}],
+				
 			],
 			
 		},
@@ -83,7 +93,7 @@ Preload libraries:
 #ifndef WIN32
 	#include <dlfcn.h>
 #endif
-
+	
 	// ... inside some kind of init() function
 	#ifdef __linux__
 	dlopen("libicui18n.so.56", RTLD_LAZY);
@@ -107,7 +117,7 @@ Preload libraries:
 
 This software uses the [Qt library](https://www.qt.io/).
 Qt is legally used under the LGPLv3 (GNU Lesser General Public License) version.
-It is [explicitly stated](https://doc.qt.io/qt-5.10/licensing.html) that Qt can be used commercially under LGPLv3:
+It is [explicitly stated](https://doc.qt.io/qt-5.13/licensing.html) that Qt can be used commercially under LGPLv3:
 
 > Qt licensed under the GNU Lesser General Public License (LGPL) version 3 is
 appropriate for the development of Qt applications provided you can comply
