@@ -1,7 +1,7 @@
 {
 	"author": "Luis Blanco <luisblanco1337@gmail.com>",
 	"name": "deps-qt-gui-raub",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Qt Gui dynamic libraries for dependent Node.js addons",
 	"license": "MIT",
 	"main": "index.js",
