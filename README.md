@@ -2,15 +2,13 @@
 
 This is a part of [Node3D](https://github.com/node-3d) project.
 
-[![NPM](https://nodei.co/npm/deps-qt-gui-raub.png?compact=true)](https://www.npmjs.com/package/deps-qt-gui-raub)
+[![NPM](https://badge.fury.io/js/deps-qt-gui-raub.svg)](https://badge.fury.io/js/deps-qt-gui-raub)
+[![ESLint](https://github.com/node-3d/deps-qt-gui-raub/actions/workflows/eslint.yml/badge.svg)](https://github.com/node-3d/deps-qt-gui-raub/actions/workflows/eslint.yml)
+[![Test](https://github.com/node-3d/deps-qt-gui-raub/actions/workflows/test.yml/badge.svg)](https://github.com/node-3d/deps-qt-gui-raub/actions/workflows/test.yml)
 
-[![Build Status](https://api.travis-ci.com/node-3d/deps-qt-gui-raub.svg?branch=master)](https://travis-ci.com/node-3d/deps-qt-gui-raub)
-[![CodeFactor](https://www.codefactor.io/repository/github/node-3d/deps-qt-gui-raub/badge)](https://www.codefactor.io/repository/github/node-3d/deps-qt-gui-raub)
-
-> npm i deps-qt-gui-raub
-
-
-## Synopsis
+```console
+npm i -s deps-qt-gui-raub
+```
 
 This dependency package is distributing **Qt Core 5.13.0**
 binaries through **NPM** for **Node.js** addons.
@@ -19,8 +17,6 @@ binaries through **NPM** for **Node.js** addons.
 * Library: Qt.
 * Linking: dynamic dll-type.
 
-
-## Usage
 
 ### Windows
 
@@ -36,54 +32,54 @@ to such directories have to be compiled into the node-addon with `rpath` option.
 Adjust `binding.gyp`:
 
 ```javascript
-	'variables': {
-		'bin'         : '<!(node -p "require(\'addon-tools-raub\').bin")',
-		'qt_core_bin' : '<!(node -p "require(\'deps-qt-core-raub\').bin")',
-		'qt_gui_bin'  : '<!(node -p "require(\'deps-qt-gui-raub\').bin")',
-	},
-	...
-	'targets': [
-		{
-			'target_name': '...',
-			
-			'conditions': [
-				
-				['OS=="linux"', {
-					'libraries': [
-						"-Wl,-rpath,'$$ORIGIN'",
-						"-Wl,-rpath,'$$ORIGIN/../node_modules/deps-qt-core-raub/<(bin)'",
-						"-Wl,-rpath,'$$ORIGIN/../node_modules/deps-qt-gui-raub/<(bin)'",
-						"-Wl,-rpath,'$$ORIGIN/../../deps-qt-core-raub/<(bin)'",
-						"-Wl,-rpath,'$$ORIGIN/../../deps-qt-gui-raub/<(bin)'",
-						'<(qt_core_bin)/libicui18n.so.56',
-						'<(qt_core_bin)/libicuuc.so.56',
-						'<(qt_core_bin)/libicudata.so.56',
-						'<(qt_core_bin)/libicuio.so.56',
-						'<(qt_core_bin)/libicule.so.56',
-						'<(qt_core_bin)/libicutu.so.56',
-						'<(qt_core_bin)/libQt5Core.so.5',
-						'<(qt_core_bin)/libQt5Network.so.5',
-						'<(qt_core_bin)/libQt5DBus.so.5',
-						'<(qt_gui_bin)/libQt5Gui.so.5',
-						'<(qt_gui_bin)/libQt5OpenGL.so.5',
-						'<(qt_gui_bin)/libQt5Widgets.so.5',
-						'<(qt_gui_bin)/libQt5XcbQpa.so.5',
-					],
-				}],
-				
-				['OS=="mac"', {
-					'libraries': [
-						'-Wl,-rpath,@loader_path',
-						'-Wl,-rpath,@loader_path/../node_modules/deps-qt-core-raub/<(bin)',
-						'-Wl,-rpath,@loader_path/../node_modules/deps-qt-gui-raub/<(bin)',
-						'-Wl,-rpath,@loader_path/../../deps-qt-core-raub/<(bin)',
-						'-Wl,-rpath,@loader_path/../../deps-qt-gui-raub/<(bin)',
-					],
-				}],
-				
-			],
-			
-		},
+  'variables': {
+    'bin': '<!(node -p "require(\'addon-tools-raub\').bin")',
+    'qt_core_bin': '<!(node -p "require(\'deps-qt-core-raub\').bin")',
+    'qt_gui_bin': '<!(node -p "require(\'deps-qt-gui-raub\').bin")',
+  },
+  ...
+  'targets': [
+    {
+      'target_name': '...',
+      
+      'conditions': [
+        
+        ['OS=="linux"', {
+          'libraries': [
+            "-Wl,-rpath,'$$ORIGIN'",
+            "-Wl,-rpath,'$$ORIGIN/../node_modules/deps-qt-core-raub/<(bin)'",
+            "-Wl,-rpath,'$$ORIGIN/../node_modules/deps-qt-gui-raub/<(bin)'",
+            "-Wl,-rpath,'$$ORIGIN/../../deps-qt-core-raub/<(bin)'",
+            "-Wl,-rpath,'$$ORIGIN/../../deps-qt-gui-raub/<(bin)'",
+            '<(qt_core_bin)/libicui18n.so.56',
+            '<(qt_core_bin)/libicuuc.so.56',
+            '<(qt_core_bin)/libicudata.so.56',
+            '<(qt_core_bin)/libicuio.so.56',
+            '<(qt_core_bin)/libicule.so.56',
+            '<(qt_core_bin)/libicutu.so.56',
+            '<(qt_core_bin)/libQt5Core.so.5',
+            '<(qt_core_bin)/libQt5Network.so.5',
+            '<(qt_core_bin)/libQt5DBus.so.5',
+            '<(qt_gui_bin)/libQt5Gui.so.5',
+            '<(qt_gui_bin)/libQt5OpenGL.so.5',
+            '<(qt_gui_bin)/libQt5Widgets.so.5',
+            '<(qt_gui_bin)/libQt5XcbQpa.so.5',
+          ],
+        }],
+        
+        ['OS=="mac"', {
+          'libraries': [
+            '-Wl,-rpath,@loader_path',
+            '-Wl,-rpath,@loader_path/../node_modules/deps-qt-core-raub/<(bin)',
+            '-Wl,-rpath,@loader_path/../node_modules/deps-qt-gui-raub/<(bin)',
+            '-Wl,-rpath,@loader_path/../../deps-qt-core-raub/<(bin)',
+            '-Wl,-rpath,@loader_path/../../deps-qt-gui-raub/<(bin)',
+          ],
+        }],
+        
+      ],
+      
+    },
 ```
 
 
