@@ -25,6 +25,7 @@
 	],
 	"files": [
 		"index.js",
+		"index.d.ts",
 		"install.js",
 		"QT_LGPL",
 		"LICENSE",
