@@ -87,6 +87,8 @@ jobs:
       - name: Copy Qt Dir - Linux
         if: matrix.os == 'ubuntu-22.04'
         run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qq patchelf
           echo "OS_NAME=linux" >> $GITHUB_ENV
           chmod +x src/qt-copy-linux.sh
           src/qt-copy-linux.sh ${{ env.QT_TMP }} ${{ github.workspace }}/../Qt/6.8.0/gcc_64

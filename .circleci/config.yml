@@ -40,7 +40,9 @@ jobs:
       - run: |
           mkdir -p ~/artifacts
           node -p "require('./package').version" > ~/artifacts/pkg-version
-          
+
+      - run: sudo apt-get update -qq
+      - run: sudo apt-get install -qq patchelf
       - run: chmod +x src/qt-mkdir.sh && src/qt-mkdir.sh ~/qt_tmp
       - run: chmod +x src/qt-copy-linux.sh && src/qt-copy-linux.sh ~/qt_tmp ~/Qt/6.8.0/gcc_arm64
       - run: cd ~/qt_tmp && tar -czf ../aarch64.gz *
