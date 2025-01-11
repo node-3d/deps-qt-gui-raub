@@ -1,0 +1,63 @@
+version: 2.1
+
+workflows:
+  pack-qt:
+    jobs:
+      - pack-qt
+      - upload-qt:
+          context:
+            - github
+          requires:
+            - pack-qt
+
+jobs:
+
+  pack-qt:
+    machine:
+      image: ubuntu-2404:current
+    resource_class: arm.medium
+    steps:
+      - restore_cache:
+          name: Restore Qt Cache
+          key: Qt-6.8.0-v3
+      - run: |
+          if [ -d "/home/circleci/Qt" ]; then
+            echo "Qt 6.8.0 already installed."
+          else
+            echo "Downloading Qt 6.8.0."
+            python3 -m pip install setuptools aqtinstall
+            cd ~
+            python3 -m aqt install-qt --outputdir ~/Qt linux_arm64 desktop 6.8.0 linux_gcc_arm64
+          fi
+      - save_cache:
+          name: Save Qt Cache
+          key: Qt-6.8.0-v3
+          paths:
+            - ../Qt
+
+      - checkout
+
+      - run: |
+          mkdir -p ~/artifacts
+          node -p "require('./package').version" > ~/artifacts/pkg-version
+          
+      - run: chmod +x src/qt-mkdir.sh && src/qt-mkdir.sh ~/qt_tmp
+      - run: chmod +x src/qt-copy-linux.sh && src/qt-copy-linux.sh ~/qt_tmp ~/Qt/6.8.0/gcc_arm64
+      - run: cd ~/qt_tmp && tar -czf ../aarch64.gz *
+      - run: mkdir -p ~/artifacts && mv ~/aarch64.gz ~/artifacts
+      - persist_to_workspace:
+          root: ~/artifacts
+          paths:
+            - aarch64.gz
+            - pkg-version
+
+  upload-qt:
+    docker:
+      - image: cimg/go:1.23.1
+    steps:
+      - attach_workspace:
+          at: /tmp/artifacts
+      - run: go install github.com/tcnksm/ghr@latest
+      - run: |
+          PKG_VERSION=`cat /tmp/artifacts/pkg-version`
+          ghr -u "node-3d" -r "${CIRCLE_PROJECT_REPONAME}" -c "${CIRCLE_SHA1}" -n "Release ${PKG_VERSION}" -replace ${PKG_VERSION} /tmp/artifacts/aarch64.gz
