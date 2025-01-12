@@ -1,6 +1,8 @@
 # $1 is tmp path - ${{ github.workspace }}/../__tmp
 # $2 is Qt platform path - /home/opc/6.8.0/gcc_arm64
 
+mkdir -p $1/plugins/xcbglintegrations
+
 # Gui
 cp $2/lib/libQt6Gui.so.6 $1/libQt6Gui.so.6
 cp $2/lib/libQt6OpenGL.so.6 $1/libQt6OpenGL.so.6
@@ -41,6 +43,7 @@ patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/platforms/libqway
 cp $2/plugins/platforms/libqxcb.so $1/plugins/platforms/libqxcb.so
 patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/platforms/libqxcb.so
 
+plugins/xcbglintegrations/libqxcb-egl-integration.so
 cp $2/plugins/xcbglintegrations/libqxcb-egl-integration.so $1/plugins/xcbglintegrations/libqxcb-egl-integration.so
 patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/xcbglintegrations/libqxcb-egl-integration.so
 
