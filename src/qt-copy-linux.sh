@@ -11,32 +11,32 @@ cp $2/lib/libQt6WaylandClient.so.6 $1/libQt6WaylandClient.so.6
 cp $2/lib/libQt6WaylandEglClientHwIntegration.so.6 $1/libQt6WaylandEglClientHwIntegration.so.6
 
 
-patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/iconengines/libqsvgicon.so
 cp $2/plugins/iconengines/libqsvgicon.so $1/plugins/iconengines/libqsvgicon.so
+patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/iconengines/libqsvgicon.so
 
-patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/imageformats/libqgif.so
 cp $2/plugins/imageformats/libqgif.so $1/plugins/imageformats/libqgif.so
+patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/imageformats/libqgif.so
 
-patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/imageformats/libqico.so
 cp $2/plugins/imageformats/libqico.so $1/plugins/imageformats/libqico.so
+patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/imageformats/libqico.so
 
-patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/imageformats/libqjpeg.so
 cp $2/plugins/imageformats/libqjpeg.so $1/plugins/imageformats/libqjpeg.so
+patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/imageformats/libqjpeg.so
 
-patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/imageformats/libqsvg.so
 cp $2/plugins/imageformats/libqsvg.so $1/plugins/imageformats/libqsvg.so
+patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/imageformats/libqsvg.so
 
-patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/platforms/libqlinuxfb.so
 cp $2/plugins/platforms/libqlinuxfb.so $1/plugins/platforms/libqlinuxfb.so
+patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/platforms/libqlinuxfb.so
 
-patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/platforms/libqoffscreen.so
 cp $2/plugins/platforms/libqoffscreen.so $1/plugins/platforms/libqoffscreen.so
+patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/platforms/libqoffscreen.so
 
-patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/platforms/libqwayland-generic.so
 cp $2/plugins/platforms/libqwayland-generic.so $1/plugins/platforms/libqwayland-generic.so
+patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/platforms/libqwayland-generic.so
 
-patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/platforms/libqwayland-egl.so
 cp $2/plugins/platforms/libqwayland-egl.so $1/plugins/platforms/libqwayland-egl.so
+patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/platforms/libqwayland-egl.so
 
-patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/platforms/libqxcb.so
 cp $2/plugins/platforms/libqxcb.so $1/plugins/platforms/libqxcb.so
+patchelf --force-rpath --set-rpath '$$ORIGIN/../..' $1/plugins/platforms/libqxcb.so
